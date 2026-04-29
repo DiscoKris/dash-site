@@ -1,55 +1,44 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
 export default function SizzlePage() {
-  const router = useRouter();
   const videoRef = useRef<HTMLVideoElement | null>(null);
-  const navigationTimeoutRef = useRef<number | null>(null);
-  const [hasStarted, setHasStarted] = useState(false);
+  const skipTimeoutRef = useRef<number | null>(null);
+  const [soundEnabled, setSoundEnabled] = useState(false);
   const [showSkip, setShowSkip] = useState(false);
-  const [hasNavigated, setHasNavigated] = useState(false);
 
   useEffect(() => {
     return () => {
-      if (navigationTimeoutRef.current !== null) {
-        window.clearTimeout(navigationTimeoutRef.current);
+      if (skipTimeoutRef.current !== null) {
+        window.clearTimeout(skipTimeoutRef.current);
       }
     };
   }, []);
 
-  const startVideo = async () => {
+  const handleTurnOnSound = async () => {
     if (!videoRef.current) return;
 
     videoRef.current.muted = false;
-    videoRef.current.currentTime = 0;
+    videoRef.current.volume = 1;
 
     try {
       await videoRef.current.play();
-      setHasStarted(true);
+      setSoundEnabled(true);
 
-      window.setTimeout(() => {
+      skipTimeoutRef.current = window.setTimeout(() => {
         setShowSkip(true);
       }, 30000);
     } catch (error) {
-      console.error("Video play failed:", error);
+      console.error("Unable to play video with sound:", error);
     }
-  };
-
-  const handleVideoEnded = () => {
-    if (hasNavigated) return;
-
-    setHasNavigated(true);
-    navigationTimeoutRef.current = window.setTimeout(() => {
-      router.push("/cast");
-    }, 500);
   };
 
   return (
     <main className="relative h-screen w-screen overflow-hidden bg-black">
       <video
+        ref={videoRef}
         autoPlay
         muted
         loop
@@ -62,20 +51,10 @@ export default function SizzlePage() {
       <div className="absolute inset-0 z-10 bg-black/60" />
 
       <div className="relative z-20 h-full w-full">
-        <video
-          ref={videoRef}
-          className={`absolute inset-0 h-full w-full object-contain bg-black transition-opacity duration-500 ${hasStarted ? "opacity-100" : "opacity-0"}`}
-          onEnded={handleVideoEnded}
-          playsInline
-          preload="auto"
-        >
-          <source src="/dashvideo.mp4" type="video/mp4" />
-        </video>
-
-        {!hasStarted && (
+        {!soundEnabled && (
           <div className="absolute inset-0 flex items-center justify-center px-6 text-center">
             <button
-              onClick={startVideo}
+              onClick={handleTurnOnSound}
               className="rounded-full bg-orange-500 px-8 py-4 text-sm font-black uppercase tracking-[0.25em] text-black transition hover:scale-105 hover:bg-orange-400"
             >
               Turn On Sound
