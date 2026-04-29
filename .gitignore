@@ -40,3 +40,4 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 public/dashvideo.mp4
+public/dashvideo.mp4
