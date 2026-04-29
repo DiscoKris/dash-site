@@ -48,7 +48,7 @@ export default function SizzlePage() {
         <source src="/dashweb.mp4" type="video/mp4" />
       </video>
 
-      <div className="absolute inset-0 z-10 bg-black/60" />
+      <div className="absolute inset-0 z-10 bg-black/20" />
 
       <div className="relative z-20 h-full w-full">
         {!soundEnabled && (
