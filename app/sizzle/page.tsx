@@ -50,34 +50,48 @@ export default function SizzlePage() {
   return (
     <main className="relative h-screen w-screen overflow-hidden bg-black">
       <video
-        ref={videoRef}
-        className="absolute inset-0 h-full w-full object-contain bg-black"
-        onEnded={handleVideoEnded}
+        autoPlay
+        muted
+        loop
         playsInline
-        preload="auto"
+        className="absolute inset-0 z-0 h-full w-full object-cover"
       >
-        <source src="/dashvideo.mp4" type="video/mp4" />
+        <source src="/dashweb.mp4" type="video/mp4" />
       </video>
 
-      {!hasStarted && (
-        <div className="absolute inset-0 z-20 flex items-center justify-center bg-black/70 px-6 text-center">
-          <button
-            onClick={startVideo}
-            className="rounded-full bg-orange-500 px-8 py-4 text-sm font-black uppercase tracking-[0.25em] text-black transition hover:scale-105 hover:bg-orange-400"
-          >
-            Turn On Sound
-          </button>
-        </div>
-      )}
+      <div className="absolute inset-0 z-10 bg-black/60" />
 
-      {showSkip && (
-        <Link
-          href="/cast"
-          className="absolute bottom-8 right-8 z-30 rounded-full border border-white/20 bg-black/60 px-5 py-3 text-xs font-bold uppercase tracking-[0.25em] text-white backdrop-blur-md hover:text-orange-400"
+      <div className="relative z-20 h-full w-full">
+        <video
+          ref={videoRef}
+          className={`absolute inset-0 h-full w-full object-contain bg-black transition-opacity duration-500 ${hasStarted ? "opacity-100" : "opacity-0"}`}
+          onEnded={handleVideoEnded}
+          playsInline
+          preload="auto"
         >
-          Skip →
-        </Link>
-      )}
+          <source src="/dashvideo.mp4" type="video/mp4" />
+        </video>
+
+        {!hasStarted && (
+          <div className="absolute inset-0 flex items-center justify-center px-6 text-center">
+            <button
+              onClick={startVideo}
+              className="rounded-full bg-orange-500 px-8 py-4 text-sm font-black uppercase tracking-[0.25em] text-black transition hover:scale-105 hover:bg-orange-400"
+            >
+              Turn On Sound
+            </button>
+          </div>
+        )}
+
+        {showSkip && (
+          <Link
+            href="/cast"
+            className="absolute bottom-8 right-8 z-30 rounded-full border border-white/20 bg-black/60 px-5 py-3 text-xs font-bold uppercase tracking-[0.25em] text-white backdrop-blur-md hover:text-orange-400"
+          >
+            Skip →
+          </Link>
+        )}
+      </div>
     </main>
   );
 }
