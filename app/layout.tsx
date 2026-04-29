@@ -27,7 +27,19 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="relative min-h-screen text-white">
+        <div className="fixed inset-0 -z-10">
+          <img
+            src="/bg.png"
+            alt="stadium background"
+            className="h-full w-full object-cover"
+          />
+          <div className="absolute inset-0 bg-black/30" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/60" />
+        </div>
+
+        <main className="relative z-10 min-h-screen">{children}</main>
+      </body>
     </html>
   );
 }

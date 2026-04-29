@@ -24,3 +24,111 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+@keyframes logoIntro {
+  0% {
+    opacity: 0;
+    transform: scale(0.95) translateY(20px);
+    filter: blur(6px);
+  }
+
+  60% {
+    opacity: 1;
+    transform: scale(1.02) translateY(0);
+    filter: blur(0px);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.animate-logoIntro {
+  animation: logoIntro 1.6s ease-out forwards;
+}
+
+@keyframes logoGlow {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 30px rgba(255, 122, 0, 0.4));
+  }
+
+  50% {
+    filter: drop-shadow(0 0 50px rgba(255, 122, 0, 0.7));
+  }
+}
+
+.animate-logoGlow {
+  animation: logoGlow 4s ease-in-out infinite;
+}
+
+@keyframes castBackIntro {
+  0% {
+    opacity: 0;
+    transform: translateX(-12px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-castBackIntro {
+  animation: castBackIntro 320ms ease-out forwards;
+}
+
+@keyframes castSoundPrompt {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(10px) scale(0.98);
+  }
+
+  55% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0) scale(1);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0) scale(1);
+  }
+}
+
+@keyframes castSoundPulse {
+  0%,
+  100% {
+    box-shadow: 0 0 18px rgba(255, 106, 0, 0.24);
+  }
+
+  50% {
+    box-shadow: 0 0 28px rgba(255, 106, 0, 0.38);
+  }
+}
+
+.animate-castSoundPrompt {
+  animation:
+    castSoundPrompt 360ms ease-out forwards,
+    castSoundPulse 4.8s ease-in-out infinite;
+}
+
+@keyframes whyTickerReveal {
+  0% {
+    opacity: 0;
+    transform: translateX(18%);
+  }
+
+  70% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-whyTickerReveal {
+  animation: whyTickerReveal 2.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
