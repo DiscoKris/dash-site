@@ -10,16 +10,16 @@ export default function Page() {
       backHref="/season"
       nextHref="/"
     >
-      <div className="relative overflow-hidden">
+      <div className="relative flex min-h-[calc(100vh-8rem)] flex-col overflow-hidden justify-center pb-36 sm:min-h-[calc(100vh-9rem)] sm:pb-40">
         <div className="pointer-events-none absolute inset-0 z-10 overflow-hidden">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.1)_64%,rgba(0,0,0,0.22)_100%)]" />
           <div className="absolute inset-0 bg-gradient-to-r from-black/24 via-transparent to-black/18" />
         </div>
 
-        <div className="relative z-20 mx-auto grid max-w-6xl gap-12 py-24 lg:grid-cols-2 lg:items-center">
-          <div className="relative">
+        <div className="relative z-20 mx-auto grid w-full max-w-6xl gap-12 py-6 lg:grid-cols-[minmax(0,1fr)_minmax(420px,0.92fr)] lg:items-center lg:gap-20">
+          <div className="relative self-center">
             <div className="absolute -left-8 top-0 h-64 w-64 rounded-full bg-[#ff7a00]/10 blur-3xl" />
-            <div className="relative space-y-1 text-left">
+            <div className="relative space-y-1.5 text-left">
               {[
                 "Diversity",
                 "Equity",
@@ -31,7 +31,7 @@ export default function Page() {
               ].map((word) => (
                 <p
                   key={word}
-                  className="text-3xl font-black uppercase leading-tight tracking-wide text-white/90 sm:text-4xl lg:text-5xl"
+                  className="text-3xl font-black uppercase leading-[0.96] tracking-wide text-white/90 sm:text-4xl lg:text-[3.35rem]"
                 >
                   {word}
                 </p>
@@ -39,7 +39,7 @@ export default function Page() {
             </div>
           </div>
 
-          <div className="relative overflow-hidden rounded-2xl border border-[#ff7a00]/20 bg-black/70 p-8 shadow-[0_26px_80px_rgba(0,0,0,0.4),0_0_32px_rgba(255,122,0,0.08)] backdrop-blur-xl sm:p-10">
+          <div className="relative self-center overflow-hidden rounded-2xl border border-[#ff7a00]/20 bg-black/70 p-8 shadow-[0_26px_80px_rgba(0,0,0,0.4),0_0_32px_rgba(255,122,0,0.08)] backdrop-blur-xl sm:p-10">
             <div className="absolute -right-12 top-6 h-32 w-32 rounded-full bg-[#ff7a00]/10 blur-3xl" />
             <div className="absolute bottom-8 right-8 grid grid-cols-4 gap-2 opacity-20">
               {Array.from({ length: 16 }).map((_, index) => (
@@ -73,11 +73,9 @@ export default function Page() {
           </div>
         </div>
 
-        <div className="pointer-events-none absolute inset-x-0 bottom-12 z-20 overflow-hidden sm:bottom-11">
-          <div className="absolute inset-y-0 left-0 w-12 bg-gradient-to-r from-black via-black/80 to-transparent sm:w-16" />
-          <div className="absolute inset-y-0 right-0 w-12 bg-gradient-to-l from-black via-black/80 to-transparent sm:w-16" />
+        <div className="pointer-events-none absolute inset-x-0 bottom-[96px] z-20 overflow-hidden sm:bottom-[104px]">
           <div className="animate-whyTickerReveal px-6 text-center sm:px-10">
-            <p className="mx-auto max-w-5xl text-xs font-semibold uppercase tracking-[0.28em] text-[#ff6a00]/90 sm:text-sm sm:tracking-[0.34em]">
+            <p className="mx-auto max-w-[960px] whitespace-nowrap text-xs font-semibold uppercase tracking-[0.28em] text-[#ff6a00]/90 sm:text-sm sm:tracking-[0.34em]">
               {tickerText}
             </p>
           </div>

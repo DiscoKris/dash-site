@@ -33,25 +33,14 @@ export function DeckShell({
   return (
     <div className="relative min-h-screen overflow-hidden text-white">
       <div
-        className={`relative flex min-h-screen w-full flex-col ${hideBottomNav ? "" : "pb-32 sm:pb-36"} ${fullBleed ? "px-0 py-0" : "mx-auto max-w-7xl px-6 py-6 sm:px-10 lg:px-12"}`}
+        className={`relative flex min-h-screen w-full flex-col ${hideBottomNav ? "" : "pb-24 sm:pb-28"} ${fullBleed ? "px-0" : "mx-auto max-w-7xl px-6 sm:px-10 lg:px-12"}`}
       >
-        <header className="flex items-center justify-between gap-4 pb-6">
-          <div className={fullBleed ? "px-6 pt-6 sm:px-10 lg:px-12" : ""}>
-            <p className="text-[0.65rem] font-semibold uppercase tracking-[0.38em] text-[#ff7a00]">
-              NO LIMITS
-            </p>
-            <p className="mt-2 text-[0.65rem] uppercase tracking-[0.32em] text-white/40">
-              {slide}
-            </p>
-          </div>
-        </header>
-
         <section
-          className={`flex flex-1 ${centered ? "items-center" : "items-start py-8 lg:py-10"}`}
+          className={`flex flex-1 ${fullBleed ? "px-6 sm:px-10 lg:px-12" : ""} ${centered ? "items-center py-6 sm:py-8" : "items-start py-4 sm:py-6 lg:py-8"}`}
         >
           <div className="w-full">
             {(kicker || title) && (
-              <div className="mb-8 max-w-5xl">
+              <div className="mb-6 max-w-5xl lg:mb-7">
                 {kicker ? (
                   <p className="mb-4 text-xs font-semibold uppercase tracking-[0.42em] text-[#ff7a00]">
                     {kicker}

@@ -223,6 +223,9 @@ export default function Page() {
     <DeckShell slide="05 / Cast" backHref="/sizzle" nextHref="/format">
       <div className="space-y-12">
         <div className="max-w-4xl">
+          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.42em] text-[#ff7a00]">
+            The Characters
+          </p>
           <h1 className="text-center text-4xl font-black uppercase tracking-[0.12em] text-white sm:text-5xl lg:text-left lg:text-6xl">
             Suggested Cast
           </h1>

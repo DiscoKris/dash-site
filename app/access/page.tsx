@@ -5,7 +5,7 @@ export default function AccessPage() {
     <>
       <div className="relative h-screen w-screen overflow-hidden bg-black">
         <div className="absolute inset-0 bg-gradient-to-br from-black via-[#0b0f1a] to-black" />
-        <div className="absolute inset-0 flex items-center justify-center bg-black">
+        <div className="absolute inset-0 flex items-center justify-center bg-black px-6 pb-24 pt-6 sm:px-10 sm:pb-28">
           <img
             src="/social.png"
             alt="Social proof"
