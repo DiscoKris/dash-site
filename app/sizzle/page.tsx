@@ -1,11 +1,14 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
 export default function SizzlePage() {
+  const router = useRouter();
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const skipTimeoutRef = useRef<number | null>(null);
+  const redirectTimeoutRef = useRef<number | null>(null);
   const [soundEnabled, setSoundEnabled] = useState(false);
   const [showSkip, setShowSkip] = useState(false);
 
@@ -13,6 +16,10 @@ export default function SizzlePage() {
     return () => {
       if (skipTimeoutRef.current !== null) {
         window.clearTimeout(skipTimeoutRef.current);
+      }
+
+      if (redirectTimeoutRef.current !== null) {
+        window.clearTimeout(redirectTimeoutRef.current);
       }
     };
   }, []);
@@ -35,14 +42,20 @@ export default function SizzlePage() {
     }
   };
 
+  const handleVideoEnd = () => {
+    redirectTimeoutRef.current = window.setTimeout(() => {
+      router.push("/cast");
+    }, 300);
+  };
+
   return (
     <main className="relative h-screen w-screen overflow-hidden bg-black">
       <video
         ref={videoRef}
         autoPlay
         muted
-        loop
         playsInline
+        onEnded={handleVideoEnd}
         className="absolute inset-0 z-0 h-full w-full object-cover"
       >
         <source src="/dashweb.mp4" type="video/mp4" />
