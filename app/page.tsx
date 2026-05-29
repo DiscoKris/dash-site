@@ -15,7 +15,7 @@ export default function Page() {
       <div className="flex w-full items-center justify-center py-8 sm:py-10">
         <div className="relative z-10 flex w-full max-w-3xl flex-col items-center px-6 text-center">
           <p className="mb-6 text-xs font-semibold uppercase tracking-[0.45em] text-[#ff7a00]">
-            Premium Documentary Series
+            Premium Docu-Soap Series
           </p>
           <div className="animate-logoIntro relative z-10 flex justify-center">
             <img

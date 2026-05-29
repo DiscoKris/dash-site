@@ -119,7 +119,7 @@ function MemberCard({
       onFocus={() => onHover(member.name)}
       onBlur={() => onHover(null)}
       onClick={() => onSelect(member)}
-      className={`group w-full overflow-hidden rounded-[1.75rem] border border-white/10 bg-white/[0.04] text-left transition duration-300 hover:-translate-y-1 hover:border-[#ff7a00]/40 hover:shadow-[0_22px_60px_rgba(0,0,0,0.35)] focus:outline-none focus:ring-2 focus:ring-[#ff7a00]/60 ${member.cardClassName ?? ""}`}
+      className={`group relative w-full overflow-hidden rounded-[1.75rem] border border-white/10 bg-white/[0.04] text-left transition duration-300 ease-out hover:border-[#ff7a00]/40 hover:shadow-[0_22px_60px_rgba(0,0,0,0.35)] focus:outline-none focus:ring-2 focus:ring-[#ff7a00]/60 ${member.cardClassName ?? ""}`}
     >
       <div className={mediaClassName}>
         <img
@@ -133,6 +133,17 @@ function MemberCard({
           }}
         />
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-black/75 to-transparent" />
+      </div>
+      <div className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center bg-black/50 opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100 group-focus-visible:opacity-100">
+        <div className="flex flex-col items-center gap-3 text-center">
+          <p className="text-sm font-bold uppercase tracking-[0.32em] text-white">
+            Watch Video
+          </p>
+          <div className="flex items-center gap-3">
+            <span className="h-0 w-0 border-b-[6px] border-l-[10px] border-t-[6px] border-b-transparent border-l-[#ff6a00] border-t-transparent" />
+            <span className="h-px w-12 bg-[#ff6a00]" />
+          </div>
+        </div>
       </div>
       <div className="p-5">
         <p className="text-lg font-semibold text-white">{member.name}</p>
