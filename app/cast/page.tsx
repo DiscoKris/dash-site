@@ -16,7 +16,7 @@ type CastMember = {
   mediaClassName?: string;
 };
 
-const players: CastMember[] = [
+const featuredRookies: CastMember[] = [
   {
     name: "Leah Klenke",
     role: "Rookie",
@@ -46,13 +46,15 @@ const players: CastMember[] = [
     video: "/catevid.mp4",
     imageClassName: "aspect-[4/5] w-full object-cover object-[center_60%]",
   },
+];
+
+const supportingCast: CastMember[] = [
   {
     name: "Kiki Van Zanten",
     role: "Star Striker",
     image: "/kiki-1.png",
     hoverImage: "/kiki-2.png",
     video: "/kikivid.mp4",
-    cardClassName: "lg:w-[16rem]",
   },
 ];
 
@@ -92,6 +94,7 @@ type MemberCardProps = {
   onHover: (name: string | null) => void;
   onSelect: (member: CastMember) => void;
   enableHoverSwap?: boolean;
+  variant?: "featured" | "standard";
 };
 
 function MemberCard({
@@ -100,16 +103,21 @@ function MemberCard({
   onHover,
   onSelect,
   enableHoverSwap = false,
+  variant = "standard",
 }: MemberCardProps) {
   const isHovered = hoveredName === member.name;
   const imageSrc =
     enableHoverSwap && isHovered && member.hoverImage
       ? member.hoverImage
       : member.image;
+  const isFeatured = variant === "featured";
   const mediaClassName = `relative overflow-hidden bg-black/20 ${member.mediaClassName ?? ""}`;
   const imageClassName =
     member.imageClassName ??
     "aspect-[4/5] w-full object-cover transition duration-500 group-hover:scale-[1.02]";
+  const cardClassName = isFeatured
+    ? "rounded-[2rem] shadow-[0_28px_70px_rgba(0,0,0,0.38)]"
+    : "rounded-[1.75rem]";
 
   return (
     <button
@@ -119,7 +127,7 @@ function MemberCard({
       onFocus={() => onHover(member.name)}
       onBlur={() => onHover(null)}
       onClick={() => onSelect(member)}
-      className={`group relative w-full overflow-hidden rounded-[1.75rem] border border-white/10 bg-white/[0.04] text-left transition duration-300 ease-out hover:border-[#ff7a00]/40 hover:shadow-[0_22px_60px_rgba(0,0,0,0.35)] focus:outline-none focus:ring-2 focus:ring-[#ff7a00]/60 ${member.cardClassName ?? ""}`}
+      className={`group relative w-full overflow-hidden border border-white/10 bg-white/[0.04] text-left transition duration-300 ease-out hover:border-[#ff7a00]/40 hover:shadow-[0_22px_60px_rgba(0,0,0,0.35)] focus:outline-none focus:ring-2 focus:ring-[#ff7a00]/60 ${cardClassName} ${member.cardClassName ?? ""}`}
     >
       <div className={mediaClassName}>
         <img
@@ -145,13 +153,41 @@ function MemberCard({
           </div>
         </div>
       </div>
-      <div className="p-5">
-        <p className="text-lg font-semibold text-white">{member.name}</p>
-        <p className="mt-2 text-xs uppercase tracking-[0.28em] text-white/55">
+      <div className={isFeatured ? "p-6" : "p-5"}>
+        <p className={isFeatured ? "text-xl font-semibold text-white" : "text-lg font-semibold text-white"}>
+          {member.name}
+        </p>
+        <p
+          className={
+            isFeatured
+              ? "mt-2 text-[0.7rem] uppercase tracking-[0.3em] text-white/55"
+              : "mt-2 text-xs uppercase tracking-[0.28em] text-white/55"
+          }
+        >
           {member.role}
         </p>
       </div>
     </button>
+  );
+}
+
+type PlaceholderCardProps = {
+  name: string;
+  role: string;
+};
+
+function PlaceholderCard({ name, role }: PlaceholderCardProps) {
+  return (
+    <div className="relative flex min-h-[23rem] w-full flex-col justify-end overflow-hidden rounded-[1.75rem] border border-white/10 bg-white/[0.04] p-5 shadow-[0_18px_50px_rgba(0,0,0,0.25)]">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,122,0,0.12),transparent_35%),linear-gradient(180deg,rgba(255,255,255,0.04),rgba(0,0,0,0.14))]" />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-black/70 to-transparent" />
+      <div className="relative z-10">
+        <p className="text-lg font-semibold text-white">{name}</p>
+        <p className="mt-2 text-xs uppercase tracking-[0.28em] text-white/55">
+          {role}
+        </p>
+      </div>
+    </div>
   );
 }
 
@@ -162,8 +198,6 @@ export default function Page() {
   const [showSoundPrompt, setShowSoundPrompt] = useState(false);
   const modalVideoRef = useRef<HTMLVideoElement | null>(null);
   const modalHistoryActiveRef = useRef(false);
-  const rookies = players.slice(0, 4);
-  const kiki = players[4];
 
   const resetModal = useCallback(() => {
     if (modalVideoRef.current) {
@@ -232,7 +266,7 @@ export default function Page() {
 
   return (
     <DeckShell slide="05 / Cast" backHref="/sizzle" nextHref="/format">
-      <div className="space-y-12">
+      <div className="space-y-14 lg:space-y-16">
         <div className="max-w-4xl">
           <p className="mb-3 text-xs font-semibold uppercase tracking-[0.42em] text-[#ff7a00]">
             The Characters
@@ -242,55 +276,56 @@ export default function Page() {
           </h1>
         </div>
 
-        <section className="space-y-5">
-          <div className="flex flex-col gap-8 lg:flex-row lg:items-center">
-            <div className="grid flex-1 gap-5 sm:grid-cols-2 xl:grid-cols-4 xl:gap-6">
-              {rookies.map((member) => (
-                <MemberCard
-                  key={member.name}
-                  member={member}
-                  hoveredName={hoveredPlayer}
-                  onHover={setHoveredPlayer}
-                  onSelect={handleSelectMember}
-                  enableHoverSwap
-                />
-              ))}
-            </div>
-
-            <div className="hidden lg:flex items-center mx-6">
-              <div className="h-[220px] w-[2px] bg-gradient-to-b from-transparent via-orange-500 to-transparent opacity-60" />
-            </div>
-
-            <div className="flex lg:ml-4">
-              <div className="relative w-full">
-                <div className="absolute inset-0 rounded-[1.75rem] bg-orange-500/10 blur-2xl" />
-                <div className="relative">
-                  <MemberCard
-                    member={kiki}
-                    hoveredName={hoveredPlayer}
-                    onHover={setHoveredPlayer}
-                    onSelect={handleSelectMember}
-                    enableHoverSwap
-                  />
-                </div>
-              </div>
-            </div>
+        <section className="space-y-6">
+          <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-4 xl:gap-6">
+            {featuredRookies.map((member) => (
+              <MemberCard
+                key={member.name}
+                member={member}
+                hoveredName={hoveredPlayer}
+                onHover={setHoveredPlayer}
+                onSelect={handleSelectMember}
+                enableHoverSwap
+                variant="featured"
+              />
+            ))}
           </div>
         </section>
 
-        <section className="space-y-5 pt-4">
+        <section className="space-y-5">
+          <p className="text-xs font-semibold uppercase tracking-[0.34em] text-white/42">
+            Supporting Cast
+          </p>
+          <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
+            {supportingCast.map((member) => (
+              <MemberCard
+                key={member.name}
+                member={member}
+                hoveredName={hoveredPlayer}
+                onHover={setHoveredPlayer}
+                onSelect={handleSelectMember}
+                enableHoverSwap
+              />
+            ))}
+            <PlaceholderCard name="Jane Campbell" role="Goalkeeper" />
+            <PlaceholderCard name="Maggie Graham" role="Midfielder" />
+            <PlaceholderCard name="Allysha Chapman" role="Defender" />
+          </div>
+        </section>
+
+        <section className="space-y-5 pt-1">
           <p className="text-xs font-semibold uppercase tracking-[0.34em] text-white/42">
             Backroom Staff
           </p>
           <div className="grid gap-5 md:grid-cols-3">
             {staff.map((member) => (
-              <MemberCard
-                key={member.name}
-                member={member}
-                hoveredName={null}
-                onHover={() => {}}
-                onSelect={handleSelectMember}
-              />
+                <MemberCard
+                  key={member.name}
+                  member={member}
+                  hoveredName={null}
+                  onHover={() => {}}
+                  onSelect={handleSelectMember}
+                />
             ))}
           </div>
         </section>
