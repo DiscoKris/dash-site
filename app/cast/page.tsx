@@ -44,7 +44,7 @@ const featuredRookies: CastMember[] = [
     image: "/cate-1.png",
     hoverImage: "/cate-2.png",
     video: "/catevid.mp4",
-    imageClassName: "aspect-[4/5] w-full object-cover object-[center_60%]",
+    imageClassName: "aspect-[4/5] w-full object-cover object-[center_70%]",
   },
 ];
 
@@ -55,6 +55,27 @@ const supportingCast: CastMember[] = [
     image: "/kiki-1.png",
     hoverImage: "/kiki-2.png",
     video: "/kikivid.mp4",
+  },
+  {
+    name: "Jane Campbell",
+    role: "Goalkeeper",
+    image: "/jane.jpg",
+    hoverImage: "/jane2.jpg",
+    video: "/janevid.mp4",
+  },
+  {
+    name: "Maggie Graham",
+    role: "Midfielder",
+    image: "/maggie.jpg",
+    hoverImage: "/maggie2.jpg",
+    video: "/maggievid.mp4",
+  },
+  {
+    name: "Allysha Chapman",
+    role: "Defender",
+    image: "/allysha.jpg",
+    hoverImage: "/allysha2.jpg",
+    video: "/allyshavid.mp4",
   },
 ];
 
@@ -116,7 +137,7 @@ function MemberCard({
     member.imageClassName ??
     "aspect-[4/5] w-full object-cover transition duration-500 group-hover:scale-[1.02]";
   const cardClassName = isFeatured
-    ? "rounded-[2rem] shadow-[0_28px_70px_rgba(0,0,0,0.38)]"
+    ? "rounded-[2rem] shadow-[0_28px_70px_rgba(0,0,0,0.38)] lg:scale-[1.03]"
     : "rounded-[1.75rem]";
 
   return (
@@ -168,26 +189,6 @@ function MemberCard({
         </p>
       </div>
     </button>
-  );
-}
-
-type PlaceholderCardProps = {
-  name: string;
-  role: string;
-};
-
-function PlaceholderCard({ name, role }: PlaceholderCardProps) {
-  return (
-    <div className="relative flex min-h-[23rem] w-full flex-col justify-end overflow-hidden rounded-[1.75rem] border border-white/10 bg-white/[0.04] p-5 shadow-[0_18px_50px_rgba(0,0,0,0.25)]">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,122,0,0.12),transparent_35%),linear-gradient(180deg,rgba(255,255,255,0.04),rgba(0,0,0,0.14))]" />
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-black/70 to-transparent" />
-      <div className="relative z-10">
-        <p className="text-lg font-semibold text-white">{name}</p>
-        <p className="mt-2 text-xs uppercase tracking-[0.28em] text-white/55">
-          {role}
-        </p>
-      </div>
-    </div>
   );
 }
 
@@ -293,7 +294,7 @@ export default function Page() {
         </section>
 
         <section className="space-y-5">
-          <p className="text-xs font-semibold uppercase tracking-[0.34em] text-white/42">
+          <p className="text-s font-semibold uppercase tracking-[0.34em] text-white">
             Supporting Cast
           </p>
           <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
@@ -307,9 +308,6 @@ export default function Page() {
                 enableHoverSwap
               />
             ))}
-            <PlaceholderCard name="Jane Campbell" role="Goalkeeper" />
-            <PlaceholderCard name="Maggie Graham" role="Midfielder" />
-            <PlaceholderCard name="Allysha Chapman" role="Defender" />
           </div>
         </section>
 
