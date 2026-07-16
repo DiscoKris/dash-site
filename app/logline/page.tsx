@@ -25,11 +25,11 @@ export default function Page() {
                 Logline
               </p>
               <h2 className="max-w-2xl text-4xl font-black leading-[0.95] text-white md:text-6xl lg:text-7xl">
-                Four young women chase a professional soccer dream, only to discover that the biggest battles happen far beyond the field.
+                For the women chasing a professional soccer dream, they will discover that the biggest battles happen far beyond the field.
               </h2>
               <p className="mt-8 max-w-2xl text-lg leading-9 text-white/70">
                 <span className="text-white">With unprecedented access,</span>{" "}
-                NO LIMITS follows four rookies as they navigate friendship,
+                NO LIMITS follows professional soccer players as they navigate friendship,
                 rivalry, ambition, family expectations, and the relentless
                 pressure of turning a childhood dream into reality.
               </p>
