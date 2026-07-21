@@ -4,9 +4,15 @@ type BottomNavProps = {
   prev: string;
   next: string;
   step: string;
+  hideNext?: boolean;
 };
 
-export default function BottomNav({ prev, next, step }: BottomNavProps) {
+export default function BottomNav({
+  prev,
+  next,
+  step,
+  hideNext = false,
+}: BottomNavProps) {
   const [currentRaw, totalRaw] = step.split("/").map((part) => part.trim());
   const current = Number(currentRaw);
   const total = Number(totalRaw);
@@ -50,7 +56,7 @@ export default function BottomNav({ prev, next, step }: BottomNavProps) {
         </div>
 
         <div className="justify-self-end">
-          {next ? (
+          {hideNext ? null : next ? (
             <Link
               href={next}
               className="text-sm font-semibold uppercase tracking-[0.25em] text-[#ffb36f] transition hover:text-[#ff7a00]"

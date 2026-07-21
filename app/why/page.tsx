@@ -8,7 +8,7 @@ export default function Page() {
     <DeckShell
       slide="08 / Why"
       backHref="/season"
-      nextHref="/"
+      nextHref="/thank-you"
     >
       <div className="relative flex min-h-[calc(100vh-8rem)] flex-col overflow-hidden justify-center pb-36 sm:min-h-[calc(100vh-9rem)] sm:pb-40">
         <div className="pointer-events-none absolute inset-0 z-10 overflow-hidden">
@@ -73,10 +73,23 @@ export default function Page() {
           </div>
         </div>
 
-        <div className="pointer-events-none absolute inset-x-0 bottom-[96px] z-20 overflow-hidden sm:bottom-[104px]">
+        <div className="pointer-events-none relative z-20 mt-12 overflow-hidden sm:absolute sm:inset-x-0 sm:bottom-[104px] sm:mt-0">
           <div className="animate-whyTickerReveal px-6 text-center sm:px-10">
             <p className="mx-auto max-w-[960px] whitespace-nowrap text-xs font-semibold uppercase tracking-[0.28em] text-[#ff6a00]/90 sm:text-sm sm:tracking-[0.34em]">
               {tickerText}
+            </p>
+          </div>
+
+          <div className="mx-auto mt-8 grid max-w-4xl grid-cols-1 gap-7 px-6 text-center sm:grid-cols-2 sm:gap-12 sm:px-10">
+            <p className="text-3xl font-black uppercase leading-[0.95] tracking-[0.1em] text-white sm:text-4xl">
+              FIFA World Cup
+              <br />
+              2027
+            </p>
+            <p className="text-3xl font-black uppercase leading-[0.95] tracking-[0.1em] text-white sm:text-4xl">
+              LA Olympics
+              <br />
+              2028
             </p>
           </div>
         </div>

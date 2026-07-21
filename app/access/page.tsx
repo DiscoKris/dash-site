@@ -13,7 +13,7 @@ export default function AccessPage() {
           />
         </div>
       </div>
-      <BottomNav prev="/logline" next="/sizzle" step="03 / 08" />
+      <BottomNav prev="/logline" next="/sizzle" step="03 / 09" />
     </>
   );
 }

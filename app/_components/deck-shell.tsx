@@ -12,6 +12,7 @@ type DeckShellProps = {
   centered?: boolean;
   fullBleed?: boolean;
   hideBottomNav?: boolean;
+  hideNext?: boolean;
 };
 
 export function DeckShell({
@@ -24,10 +25,11 @@ export function DeckShell({
   centered = false,
   fullBleed = false,
   hideBottomNav = false,
+  hideNext = false,
 }: DeckShellProps) {
   const slideIndicatorMatch = slide.match(/^(\d{2})\s*\/\s*(.+)$/);
   const slideIndicator = slideIndicatorMatch
-    ? `${slideIndicatorMatch[1]} / 08`
+    ? `${slideIndicatorMatch[1]} / 09`
     : slide;
 
   return (
@@ -58,7 +60,12 @@ export function DeckShell({
         </section>
       </div>
       {hideBottomNav ? null : (
-        <BottomNav prev={backHref ?? ""} next={nextHref ?? ""} step={slideIndicator} />
+        <BottomNav
+          prev={backHref ?? ""}
+          next={nextHref ?? ""}
+          step={slideIndicator}
+          hideNext={hideNext}
+        />
       )}
     </div>
   );
